@@ -41,7 +41,9 @@ def parcial(x, y, Z):
     X = np.c_[np.ones(len(x)), Z]
     rx = x - X @ np.linalg.lstsq(X, x, rcond=None)[0]
     ry = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
-    return stats.pearsonr(rx, ry)[0]
+    r = stats.pearsonr(rx, ry)[0]
+    gl = len(x) - 2 - np.atleast_2d(Z.T).shape[0]       # grados de libertad de una correlación parcial
+    return r, 2 * stats.t.sf(abs(r) * np.sqrt(gl / (1 - r ** 2)), gl)
 
 
 def main():
@@ -88,8 +90,8 @@ def main():
         dx = delta[(radio, cn, pn)].reindex(sub.nombre).values
         filas.append({"datos": dn, "ventana": vn, "estimador": estim, "inicio": ini, "radio": radio,
                       "cultivo": cn, "periodo": pn, "estaciones": conj, "n": len(sub),
-                      "rho": stats.spearmanr(dx, tds)[0],
-                      "parcial": parcial(dx, tds, np.c_[sub.lat, sub.lon])})
+                      **dict(zip(("rho", "p_rho"), stats.spearmanr(dx, tds))),
+                      **dict(zip(("parcial", "p_par"), parcial(dx, tds, np.c_[sub.lat, sub.lon])))})
     r = pd.DataFrame(filas)
     r.to_csv("analisis/23_multiverso.csv", index=False)
 

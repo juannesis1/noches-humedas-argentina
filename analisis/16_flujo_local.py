@@ -27,7 +27,7 @@ import pandas as pd
 from scipy import stats
 
 sys.path.insert(0, os.path.dirname(__file__))
-from estadistica import sen  # noqa: E402
+from estadistica import sen, parcial  # noqa: E402
 
 DIR = os.environ.get("DIR_NOCHES", "data/noches_ajustadas_pares_laxo")
 VENTANAS = {"ONDJFM": [10, 11, 12, 1, 2, 3], "OND": [10, 11, 12], "JFM": [1, 2, 3]}
@@ -91,11 +91,6 @@ def descomponer(d, meses, con_calma):
     return out
 
 
-def parcial(x, y, Z):
-    X = np.c_[np.ones(len(x)), Z]
-    rx = x - X @ np.linalg.lstsq(X, x, rcond=None)[0]
-    ry = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
-    return stats.pearsonr(rx, ry)
 
 
 def main():

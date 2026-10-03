@@ -20,7 +20,7 @@ import xarray as xr
 from scipy import stats
 
 sys.path.insert(0, os.path.dirname(__file__))
-from estadistica import sen  # noqa: E402
+from estadistica import sen, parcial  # noqa: E402
 
 h = importlib.import_module("19_huella_temporal")
 rng = np.random.default_rng(21)
@@ -46,11 +46,6 @@ def boot(p, cols, tendencia, n=1000):
     return np.percentile(out, [5, 95])
 
 
-def parcial(x, y, Z):
-    X = np.c_[np.ones(len(x)), Z]
-    rx = x - X @ np.linalg.lstsq(X, x, rcond=None)[0]
-    ry = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
-    return stats.pearsonr(rx, ry)
 
 
 def main():

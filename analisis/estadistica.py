@@ -59,3 +59,18 @@ def fdr(p, alfa=0.10):
         idx = np.where(ok)[0][orden[:kmax + 1]]
         rech[idx] = True
     return rech
+
+
+def parcial(x, y, Z):
+    """Correlación parcial de Pearson de x e y controlando por las columnas de Z, con su p bilateral.
+
+    Usa n − 2 − k grados de libertad (k = número de covariables); pearsonr sobre los residuos usaría n − 2.
+    """
+    x, y = np.asarray(x, float), np.asarray(y, float)
+    Z = np.asarray(Z, float).reshape(len(x), -1)
+    X = np.c_[np.ones(len(x)), Z]
+    rx = x - X @ np.linalg.lstsq(X, x, rcond=None)[0]
+    ry = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
+    r = stats.pearsonr(rx, ry)[0]
+    gl = len(x) - 2 - Z.shape[1]
+    return r, 2 * stats.t.sf(abs(r) * np.sqrt(gl / (1 - r ** 2)), gl)

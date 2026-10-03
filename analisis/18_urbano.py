@@ -26,6 +26,10 @@ GHSL = "data/ghsl/GHS_BUILT_S_E{}_GLOBE_R2023A_54009_1000_V1_0.tif"
 RADIOS = (3, 10)
 
 
+sys.path.insert(0, os.path.dirname(__file__))
+from estadistica import parcial  # noqa: E402
+
+
 def construido(lat, lon, anio, radio_km):
     with rasterio.open(GHSL.format(anio)) as r:
         x, y = Transformer.from_crs("EPSG:4326", r.crs, always_xy=True).transform(lon, lat)
@@ -39,11 +43,6 @@ def construido(lat, lon, anio, radio_km):
     return np.nanmean(a[dentro]) / 1e6 * 100     # % de superficie construida
 
 
-def parcial(x, y, Z):
-    X = np.c_[np.ones(len(x)), Z]
-    rx = x - X @ np.linalg.lstsq(X, x, rcond=None)[0]
-    ry = y - X @ np.linalg.lstsq(X, y, rcond=None)[0]
-    return stats.pearsonr(rx, ry)
 
 
 def main():

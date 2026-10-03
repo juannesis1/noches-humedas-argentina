@@ -318,22 +318,6 @@ def figS7():
     plt.close(fig)
 
 
-if __name__ == "__main__":
-    os.makedirs(OUT, exist_ok=True)
-    fig1()
-    fig2()
-    fig3()
-    fig4()
-    figS1()
-    figS2()
-    figS3()
-    figS4()
-    fig5()
-    figS5()
-    figS6()
-    figS7()
-    print("ok")
-
 
 def figS2():
     r = pd.read_csv("analisis/26_intensificacion.csv")
@@ -552,3 +536,21 @@ def figS6():
     fig.tight_layout(w_pad=2)
     fig.savefig(f"{OUT}/figS6_diurnal.png")
     plt.close(fig)
+
+
+
+if __name__ == "__main__":
+    os.makedirs(OUT, exist_ok=True)
+    fig1()
+    fig2()
+    fig3()
+    fig4()
+    figS1()
+    figS2()
+    figS3()
+    figS4()
+    fig5()
+    figS5()
+    figS6()
+    figS7()
+    print("ok")
