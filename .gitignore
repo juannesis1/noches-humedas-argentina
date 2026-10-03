@@ -1,0 +1,18 @@
+# Datos (públicos pero voluminosos: ver DATOS.md)
+data/
+logs/
+.venv/
+__pycache__/
+*.part*
+# Material con derechos de autor o de uso interno
+bibliografia/
+envio/
+paper/versiones_anteriores/
+paper/notas_de_revision/
+paper/.html/
+# Credenciales: nunca
+.cdsapirc
+*.key
+.env
+.DS_Store
+logs_reproducir.txt
