@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "Nocturnal humidity in subtropical Argentina, 1980–2025: analysis code"
+type: software
+authors:
+  - family-names: Nesis
+    given-names: Juan
+    affiliation: "Independent researcher, Buenos Aires, Argentina"
+    orcid: "https://orcid.org/0009-0008-2439-3378"
+abstract: >-
+  Code that reproduces the analysis of warm-season nocturnal temperature, dew point and humidity trends at
+  homogenized stations in subtropical Argentina, Paraguay and Uruguay (1980–2025), and their association with
+  urban growth, agricultural intensification, circulation and vegetation.
+license: MIT
+repository-code: "https://github.com/juannesis1/noches-humedas-argentina"
+version: "1.0.0"
+date-released: "2026-10-03"
+keywords:
+  - nocturnal humidity
+  - dew point
+  - heat stress
+  - agricultural intensification
+  - urban growth
+  - Argentina
